@@ -309,7 +309,7 @@ function App() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-center gap-6 stagger-animation">
-          <a href="https://drive.google.com/file/d/1Z_dhu1wjbp-HVp2RIVK4xL248QlJo838/view?usp=drive_link" 
+          <a href="https://drive.google.com/file/d/1trMWEOVZGyMaUGfIVB8bq1s907xdyjA-/view?usp=sharing" 
              target="_blank"
              className="group relative hover-glow">
             <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
