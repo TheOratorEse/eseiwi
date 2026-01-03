@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,10 +6,13 @@
 
 @layer base {
   body {
-    font-family: 'Libre Baskerville', serif;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #0f1629 50%, #1a2447 100%);
+    color: #ffffff;
   }
 }
 
+/* ========== FUTURISTIC ANIMATIONS ========== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -21,6 +24,458 @@
   }
 }
 
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.3),
+      inset 0 0 20px rgba(157, 0, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(157, 0, 255, 0.6),
+      inset 0 0 30px rgba(157, 0, 255, 0.2);
+  }
+}
+
+@keyframes gridFade {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes neonBorder {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(0, 217, 255, 0.3),
+      inset 0 0 5px rgba(0, 217, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6),
+      inset 0 0 20px rgba(0, 217, 255, 0.2);
+  }
+}
+
+/* ========== PARTICLE & ADVANCED ANIMATIONS ========== */
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 30px rgba(0, 217, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 217, 255, 0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(40px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(40px) rotate(-360deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  60% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5),
+      0 0 20px rgba(0, 217, 255, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.8),
+      0 0 40px rgba(0, 217, 255, 0.6), 0 0 60px rgba(157, 0, 255, 0.4);
+  }
+}
+
+/* Floating particle animation */
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Shimmer line effect */
+@keyframes shimmerLine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ========== UTILITY CLASSES ========== */
 .animate-fade-in {
   animation: fadeIn 1s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.neon-border {
+  border: 2px solid rgba(0, 217, 255, 0.4);
+  animation: neonBorder 2s ease-in-out infinite;
+}
+
+.glow-text {
+  color: #00d9ff;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.glow-text-purple {
+  color: #9d00ff;
+  text-shadow: 0 0 10px rgba(157, 0, 255, 0.5), 0 0 20px rgba(157, 0, 255, 0.3);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.bg-gradient-neon {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 217, 255, 0.1) 0%,
+    rgba(157, 0, 255, 0.1) 100%
+  );
+}
+
+.glass-effect {
+  background: rgba(15, 22, 41, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(15, 22, 41, 0.8);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.scan-line {
+  animation: gridFade 3s ease-in-out infinite;
+}
+
+/* ========== BUTTON ENHANCEMENTS ========== */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.btn-neon:hover::before {
+  left: 100%;
+}
+
+.btn-neon > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== TECH TAG ENHANCEMENTS ========== */
+.tech-tag {
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 217, 255, 0.2),
+    transparent
+  );
+  animation: shimmerLine 2s infinite;
+}
+
+.tech-tag:hover {
+  background: rgba(0, 217, 255, 0.2);
+  border-color: rgba(0, 217, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ========== PARTICLE EFFECT ========== */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #00d9ff, #9d00ff);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+  animation: floatParticles linear forwards;
+}
+
+.particle-cyan {
+  --color: #00d9ff;
+}
+
+.particle-purple {
+  --color: #9d00ff;
+}
+
+.particle-blue {
+  --color: #0099ff;
+}
+
+/* ========== SCROLLBAR STYLING ========== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 22, 41, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d9ff, #9d00ff);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00d9ff, #0099ff);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+/* ========== SECTION ANIMATIONS ========== */
+.section-enter {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.stagger-animation > * {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.stagger-animation > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger-animation > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger-animation > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger-animation > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger-animation > *:nth-child(n + 5) {
+  animation-delay: calc(0.1s * (n - 4));
+}
+
+/* ========== HOVER EFFECTS ========== */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(157, 0, 255, 0.3);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .animate-slide-in-left {
+    animation: slideInUp 0.8s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInUp 0.8s ease-out;
+  }
 }

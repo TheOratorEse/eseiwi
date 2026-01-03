@@ -1,5 +1,33 @@
-import React, { useState } from 'react';
-import { Github, Linkedin, Mail, FileText, ExternalLink, Code2, Phone } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Github, Linkedin, Mail, FileText, ExternalLink, Code2, Phone, Zap, Star } from 'lucide-react';
+
+// Particle Effect Component
+const ParticleEffect: React.FC = () => {
+  useEffect(() => {
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle particle-cyan';
+      const randomX = Math.random() * window.innerWidth;
+      const randomDuration = 3 + Math.random() * 2;
+      const randomSize = 2 + Math.random() * 4;
+      
+      particle.style.left = randomX + 'px';
+      particle.style.top = window.innerHeight + 'px';
+      particle.style.setProperty('--duration', randomDuration + 's');
+      particle.style.setProperty('--size', randomSize + 'px');
+      particle.style.animation = `floatParticles ${randomDuration}s linear forwards`;
+      
+      document.body.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), randomDuration * 1000);
+    };
+
+    const interval = setInterval(createParticle, 300);
+    return () => clearInterval(interval);
+  }, []);
+
+  return null;
+};
 
 function App() {
   const [activeTab, setActiveTab] = useState('web');
@@ -70,6 +98,13 @@ function App() {
       tech: ["Flutter", "Provider", "Weather API", "Geolocation", "Firebase"]
     },
     {
+      title: "NaijaConnect Mobile App",
+      description: "A social networking application for connecting with people in Nigeria, featuring chat and profile functionalities.",
+      link: "https://play.google.com/store/apps/details?id=com.naija.connect",
+      tech: ["React Native", "Laravel", "Redux", "Paystack"]
+
+    },
+    {
       title: "CycleKit Mobile App",
       description: "A mobile application for Tracking female cycle, ovulation, fertility and getting sanitary products.",
       link: "https://github.com/TheOratorEse/cyclekit",
@@ -87,71 +122,133 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-purple-900 text-white font-['Baskerville']">
+    <div className="min-h-screen bg-dark-bg text-white font-poppins overflow-hidden">
+      {/* Particle Effect */}
+      <ParticleEffect />
+
+      {/* Animated background grid */}
+      <div className="fixed inset-0 z-0 opacity-10">
+        <div className="absolute inset-0 scan-line" style={{
+          backgroundImage: `linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent)`,
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
       {/* Header/Hero Section */}
-      <header className="container mx-auto px-4 py-20 flex flex-col items-center text-center">
-        {/* Profile Photo */}
-        <div className="mb-8">
+      <header className="container mx-auto px-4 py-20 flex flex-col items-center text-center relative z-10">
+        {/* Decorative top accent */}
+        <div className="mb-12 flex items-center gap-3 justify-center animate-slide-in-up">
+          <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-neon-cyan animate-pulse"></div>
+          <Zap size={20} className="text-neon-cyan animate-pulse-ring" />
+          <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-neon-cyan animate-pulse"></div>
+        </div>
+
+        {/* Profile Photo - Squircle */}
+        <div className="mb-12 relative group animate-bounce-in">
+          <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan rounded-squircle blur opacity-60 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan rounded-squircle opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
           <img 
-            src="https://i.postimg.cc/SRKzBXHr/eseiwi.jpg" //my image url
+            src="https://i.postimg.cc/SRKzBXHr/eseiwi.jpg"
             alt="Eseiwi Omorogbe"
-            className="w-48 h-48 rounded-full border-4 border-purple-400 shadow-lg animate-fade-in"
+            className="relative w-56 h-56 rounded-squircle border-2 border-neon-cyan shadow-2xl animate-float object-cover hover-glow"
           />
         </div>
 
-        <h1 className="text-5xl font-bold mb-6 animate-fade-in">Eseiwi Omorogbe</h1>
-        <p className="text-2xl mb-8 text-purple-200">Full Stack Mobile & Web Developer</p>
+        <h1 className="text-6xl md:text-7xl font-bold mb-4 animate-fade-in tracking-tight">
+          <span className="bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan bg-clip-text text-transparent glow-text">
+            Eseiwi Omorogbe
+          </span>
+        </h1>
+        <div className="flex items-center justify-center gap-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="w-8 h-1 bg-gradient-to-r from-neon-cyan to-transparent"></div>
+          <p className="text-xl md:text-2xl text-neon-cyan tracking-widest font-space">FULL STACK DEVELOPER</p>
+          <div className="w-8 h-1 bg-gradient-to-l from-neon-cyan to-transparent"></div>
+        </div>
         
         {/* About Section */}
-        <div className="max-w-2xl mx-auto mb-8 bg-purple-800 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold mb-4">About Me</h2>
-          <p className="text-purple-200 leading-relaxed">
-            I am a passionate Full Stack Developer with extensive experience in both web and mobile development. 
-            Specializing in creating robust and scalable applications using modern technologies, I have a proven 
-            track record of delivering high-quality solutions that meet business objectives. With expertise in 
-            Flutter, React, and Python(Flask), Laravel, Node.js, and various other technologies, I bring a comprehensive approach to 
-            software development, from concept to deployment.
+        <div className="max-w-3xl mx-auto mb-12 glass-effect p-8 rounded-lg border-2 border-neon-cyan border-opacity-30 hover:border-opacity-60 transition-all animate-slide-in-up hover-lift" style={{ animationDelay: '0.3s' }}>
+          <h2 className="text-2xl font-bold mb-4 text-neon-cyan flex items-center justify-center gap-2">
+            <Star size={24} className="animate-pulse" /> ABOUT_ME
+          </h2>
+          <p className="text-gray-300 leading-relaxed text-lg">
+            Passionate Full Stack Developer crafting high-performance applications with cutting-edge technologies. 
+            Specializing in Flutter, React, Python, and modern backend architectures. Transforming ideas into scalable, 
+            robust solutions that push boundaries and deliver excellence.
           </p>
         </div>
 
-        <div className="flex gap-6">
+        {/* Social Links */}
+        <div className="flex gap-8 mb-12 stagger-animation">
           <a href="https://github.com/TheOratorEse" target="_blank" rel="noopener noreferrer" 
-             className="hover:text-purple-300 transition-colors">
-            <Github size={24} />
+             className="group relative hover-glow">
+            <div className="absolute -inset-2 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+            <div className="relative px-4 py-2 bg-navy-bg border border-neon-cyan rounded-lg hover:bg-navy-light transition-colors hover-lift">
+              <Github size={24} className="text-neon-cyan" />
+            </div>
           </a>
           <a href="https://linkedin.com/in/eseiwi-omorogbe" target="_blank" rel="noopener noreferrer"
-             className="hover:text-purple-300 transition-colors">
-            <Linkedin size={24} />
+             className="group relative hover-glow">
+            <div className="absolute -inset-2 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+            <div className="relative px-4 py-2 bg-navy-bg border border-neon-blue rounded-lg hover:bg-navy-light transition-colors hover-lift">
+              <Linkedin size={24} className="text-neon-blue" />
+            </div>
           </a>
-          <a href="mailto:esewi.omorogbe@gmail.com" className="hover:text-purple-300 transition-colors">
-            <Mail size={24} />
+          <a href="mailto:esewi.omorogbe@gmail.com" 
+             className="group relative hover-glow">
+            <div className="absolute -inset-2 bg-gradient-to-r from-neon-blue to-neon-cyan rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+            <div className="relative px-4 py-2 bg-navy-bg border border-neon-cyan rounded-lg hover:bg-navy-light transition-colors hover-lift">
+              <Mail size={24} className="text-neon-cyan" />
+            </div>
           </a>
         </div>
       </header>
 
       {/* Tech Stack Section */}
-      <section className="container mx-auto px-4 py-16 bg-purple-800 rounded-lg my-8">
-        <h2 className="text-3xl font-bold mb-8 text-center">Tech Stack</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {techStacks.map((tech, index) => (
-            <span key={index} 
-                  className="px-4 py-2 bg-purple-700 rounded-full hover:bg-purple-600 transition-colors">
-              {tech}
-            </span>
-          ))}
+      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="glow-text">[ TECH STACKS_ ]</span>
+          </h2>
+          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
+            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-blue"></div>
+            <Zap size={20} className="text-neon-cyan animate-pulse" />
+            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-blue"></div>
+          </div>
+        </div>
+        <div className="glass-effect border-2 border-neon-cyan border-opacity-20 rounded-lg p-8 hover-lift">
+          <div className="flex flex-wrap justify-center gap-4 stagger-animation">
+            {techStacks.map((tech, index) => (
+              <span key={index} 
+                    className="tech-tag px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:text-neon-cyan"
+                    style={{ animationDelay: `${index * 0.05}s` }}>
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
+      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="glow-text">[ PROJECTS_DONE ]</span>
+          </h2>
+          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
+            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-purple"></div>
+            <Zap size={20} className="text-neon-cyan animate-pulse" />
+            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-purple"></div>
+          </div>
+        </div>
         
         {/* Tabs */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-12 gap-4 animate-slide-in-up">
           <button 
             onClick={() => setActiveTab('web')}
-            className={`px-6 py-2 rounded-l-lg transition-colors ${
-              activeTab === 'web' ? 'bg-purple-600' : 'bg-purple-800'
+            className={`px-8 py-3 font-medium rounded-lg border-2 transition-all duration-300 hover-lift ${
+              activeTab === 'web' 
+                ? 'bg-gradient-to-r from-neon-cyan to-neon-blue border-neon-cyan text-navy-bg' 
+                : 'border-neon-cyan border-opacity-40 text-neon-cyan hover:border-opacity-100'
             }`}
           >
             <Code2 className="inline mr-2" size={18} />
@@ -159,8 +256,10 @@ function App() {
           </button>
           <button 
             onClick={() => setActiveTab('mobile')}
-            className={`px-6 py-2 rounded-r-lg transition-colors ${
-              activeTab === 'mobile' ? 'bg-purple-600' : 'bg-purple-800'
+            className={`px-8 py-3 font-medium rounded-lg border-2 transition-all duration-300 hover-lift ${
+              activeTab === 'mobile' 
+                ? 'bg-gradient-to-r from-neon-cyan to-neon-blue border-neon-cyan text-navy-bg' 
+                : 'border-neon-cyan border-opacity-40 text-neon-cyan hover:border-opacity-100'
             }`}
           >
             <Phone className="inline mr-2" size={18} />
@@ -172,45 +271,72 @@ function App() {
         <div className="grid md:grid-cols-2 gap-8">
           {(activeTab === 'web' ? webProjects : mobileProjects).map((project, index) => (
             <div key={index} 
-                 className="bg-purple-800 p-6 rounded-lg hover:transform hover:scale-105 transition-all">
-              <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-              <p className="text-purple-200 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, techIndex) => (
-                  <span key={techIndex} className="text-sm bg-purple-700 px-2 py-1 rounded">
-                    {tech}
-                  </span>
-                ))}
+                 className="group relative glass-effect p-6 rounded-lg border-2 border-neon-cyan border-opacity-20 hover:border-opacity-60 transition-all duration-300 hover:transform hover:scale-105 overflow-hidden hover-lift stagger-animation"
+                 style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan via-transparent to-neon-blue opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold mb-3 text-neon-cyan">{project.title}</h3>
+                <p className="text-gray-300 mb-4 leading-relaxed">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech, techIndex) => (
+                    <span key={techIndex} className="tech-tag text-xs px-3 py-1 rounded-full">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <a href={project.link} 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   className="inline-flex items-center gap-2 text-neon-cyan hover:text-neon-blue transition-colors font-medium btn-neon">
+                  VIEW_PROJECT <ExternalLink size={16} />
+                </a>
               </div>
-              <a href={project.link} 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="inline-flex items-center text-purple-300 hover:text-white">
-                View Project <ExternalLink size={16} className="ml-2" />
-              </a>
             </div>
           ))}
         </div>
       </section>
 
       {/* Resume Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl font-bold mb-8">Resume & Professional Profile</h2>
-        <div className="flex justify-center gap-6">
+      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="glow-text">[ CREDENTIALS ]</span>
+          </h2>
+          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
+            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-blue"></div>
+            <Zap size={20} className="text-neon-cyan animate-pulse" />
+            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-blue"></div>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row justify-center gap-6 stagger-animation">
           <a href="https://drive.google.com/file/d/1Z_dhu1wjbp-HVp2RIVK4xL248QlJo838/view?usp=drive_link" 
              target="_blank"
-             className="inline-flex items-center bg-purple-600 px-6 py-3 rounded-lg hover:bg-purple-500 transition-colors">
-            <FileText className="mr-2" size={20} />
-            View Resume
+             className="group relative hover-glow">
+            <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+            <div className="relative inline-flex items-center gap-2 bg-navy-bg px-8 py-4 rounded-lg border-2 border-neon-cyan text-neon-cyan hover:text-white hover:bg-navy-light transition-all btn-neon hover-lift">
+              <FileText size={20} />
+              VIEW_RESUME
+            </div>
           </a>
           <a href="https://linkedin.com/in/eseiwi-omorogbe" 
-             target="LinkedIn Profile"
-             className="inline-flex items-center bg-purple-600 px-6 py-3 rounded-lg hover:bg-purple-500 transition-colors">
-            <Linkedin className="mr-2" size={20} />
-            LinkedIn Profile
+             target="_blank"
+             rel="noopener noreferrer"
+             className="group relative hover-glow">
+            <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+            <div className="relative inline-flex items-center gap-2 bg-navy-bg px-8 py-4 rounded-lg border-2 border-neon-cyan text-neon-cyan hover:text-white hover:bg-navy-light transition-all btn-neon hover-lift">
+              <Linkedin size={20} />
+              LINKEDIN_PROFILE
+            </div>
           </a>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="container mx-auto px-4 py-8 text-center border-t border-neon-cyan border-opacity-20 relative z-10">
+        <p className="text-gray-400 text-sm">
+          © 2026 Eseiwi Omorogbe| All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
