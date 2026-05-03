@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, FileText, ExternalLink, Smartphone, ArrowDown, Globe, Menu, X, Code, Server, Database, Smartphone as MobileIcon, Cloud, Lock, Zap, ChevronDown, Briefcase, User, GraduationCap, Award } from 'lucide-react';
+import { Github, Linkedin, Mail, FileText, ExternalLink, Smartphone, ArrowDown, Globe, Menu, X, Code, Server, Database, Smartphone as MobileIcon, Cloud, Lock, Zap, Briefcase, User, GraduationCap, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -16,57 +16,75 @@ const navItems = [
 ];
 
 const skills = [
-  { category: "Frontend", icon: Code, items: ["React", "React Native", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Figma"] },
-  { category: "Backend", icon: Server, items: ["Node.js", "Express.js", "Python", "Flask", "Laravel", "REST API", "GraphQL"] },
-  { category: "Database", icon: Database, items: ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "SQL"] },
-  { category: "Mobile", icon: MobileIcon, items: ["Flutter", "React Native", "Android", "iOS"] },
-  { category: "Cloud", icon: Cloud, items: ["AWS", "Heroku", "Vercel", "Netlify", "Docker"] },
-  { category: "Tools", icon: Zap, items: ["Git", "CI/CD", "Postman", "Jira", "Figma"] },
+  { category: "Frontend", icon: Code, items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"] },
+  { category: "Backend", icon: Server, items: ["Node.js", "Express.js", "Laravel", "REST API", "GraphQL"] },
+  { category: "Mobile", icon: Smartphone, items: ["Flutter", "Dart", "Riverpod", "Provider", "Firebase"] },
+  { category: "Database", icon: Database, items: ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "SQLite"] },
+  { category: "DevOps", icon: Cloud, items: ["Docker", "Kubernetes", "AWS", "GCP", "GitLab CI/CD", "Jenkins"] },
+  { category: "Tools", icon: Zap, items: ["Git", "CI/CD", "Bash", "Python", "Figma", "Postman"] },
 ];
 
 const experience = [
   {
-    role: "Full Stack Developer",
-    company: "Tech Solutions Inc.",
+    role: "Full-Stack Developer & DevOps Engineer",
+    company: "Joker Hotels",
+    period: "Feb 2025 – Apr 2025",
+    description: "Designed hotel booking platform using React/Next.js and Node.js. Established CI/CD pipeline for automated deployment. Managed Docker containerization for high availability.",
+  },
+  {
+    role: "Mobile Application Development Instructor",
+    company: "YMIT & Andes Tech",
+    period: "2024 - 2025",
+    description: "Delivered comprehensive Flutter training sessions. Designed interactive course materials with real-world projects. Mentored future developers in cross-platform mobile development.",
+  },
+  {
+    role: "Mobile App Development (Flutter) Instructor",
+    company: "HIIT PLC",
     period: "2023 - Present",
-    description: "Building scalable web and mobile applications using modern technologies.",
+    description: "Teaching Flutter framework and Dart programming. Guided students in developing cross-platform mobile apps with best practices in UI/UX.",
   },
   {
-    role: "Mobile Developer",
-    company: "AppWorks Studio",
-    period: "2021 - 2023",
-    description: "Developed cross-platform mobile applications for various clients.",
+    role: "CTO & Software Developer",
+    company: "GreenPoint Technology",
+    period: "2019 - 2023",
+    description: "Led cross-functional development teams. Implemented GitLab CI/CD pipelines reducing release cycle by 40%. Oversaw company and client website development.",
   },
   {
-    role: "Junior Developer",
-    company: "StartUp Hub",
-    period: "2019 - 2021",
-    description: "Started career building MVPs and learning modern development practices.",
+    role: "Web Application Developer",
+    company: "INZIDERX",
+    period: "2018 - 2021",
+    description: "Led blockchain and web development. Developed decentralized exchange (DEX) using Lightning Network and atomic swaps. Built Web and Desktop wallet applications.",
+  },
+  {
+    role: "Computer Engineer",
+    company: "IFOCON Institute of Technology",
+    period: "2014 - 2015",
+    description: "Provided technical support for hardware, software, and internet access. Maintained critical systems for uninterrupted client service.",
   },
 ];
 
 const webProjects = [
   {
-    title: "Csgo-game- Stats Backend",
-    description: "A RESTful API built with Node.js and Express for fetching CS:GO game statistics.",
-    link: "https://github.com/TheOratorEse/csgo-game-stats",
-    tech: ["Python", "Flask", "Backend Api", "JWT"]
+    title: "Hotel Booking Platform",
+    description: "Full-stack hotel booking platform with React/Next.js frontend and Node.js backend. Includes CI/CD pipeline and Docker containerization.",
+    link: "https://joker-hotels.com",
+    tech: ["React", "Next.js", "Node.js", "Express", "Docker"]
   },
   {
-    title: "Fit2Feet Backend",
-    description: "A backend service for the Fit2Feet mobile application, handling user data and shoe size recommendations.",
-    link: "https://github.com/TheOratorEse/fit2feetserver",
-    tech: ["Python", "Flask", "Machine Learning", "OpenCv Python"]
+    title: "GreenPoint Website",
+    description: "Company website developed for GreenPoint Technology with modern design and admin dashboard.",
+    link: "https://greenpoint.com",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"]
   },
   {
-    title: "Inventory Management System",
-    description: "A web-based inventory management system with real-time stock tracking.",
-    link: "https://github.com/TheOratorEse/inventory-management-system",
-    tech: ["Vue", "Laravel", "Express", "MongoDB"]
+    title: "INZIDERX Web Portal",
+    description: "Blockchain-powered decentralized exchange platform with margin trading and on-chain governance.",
+    link: "https://inziderx.com",
+    tech: ["React", "Node.js", "Blockchain", "Web3"]
   },
   {
-    title: "Real Estate Website",
-    description: "A modern real estate platform featuring property listings.",
+    title: "Real Estate Platform",
+    description: "Modern real estate platform with property listings and user authentication.",
     link: "https://github.com/TheOratorEse/real-estate-website",
     tech: ["React", "Node.js", "Express", "MongoDB"]
   }
@@ -74,40 +92,40 @@ const webProjects = [
 
 const mobileProjects = [
   {
-    title: "Citi Pass App",
-    description: "City Pass App - visitor access in gated communities.",
-    link: "https://github.com/TheOratorEse/city-pass-app",
-    tech: ["Flutter", "Firebase", "Supabase"]
-  },
-  {
-    title: "WebView App",
-    description: "Convert existing webApp to a Mobile app.",
-    link: "https://github.com/TheOratorEse/webview_app",
-    tech: ["Flutter", "Javascript", "WebView", "Firebase"]
-  },
-  {
-    title: "Fit2Feet",
-    description: "Feet measurement and shoe size recommendations.",
-    link: "https://github.com/TheOratorEse/delivery-app",
-    tech: ["Flutter", "Provider", "Python", "Flask"]
-  },
-  {
-    title: "Food Recipe App",
-    description: "Discovering and sharing food recipes.",
+    title: "Flutter Food App",
+    description: "Cross-platform food application with real-time ordering features.",
     link: "https://github.com/TheOratorEse/food-recipe-app",
     tech: ["Flutter", "Firebase", "Node.js"]
   },
   {
-    title: "Taski Manager App",
-    description: "Task management application.",
+    title: "Task Manager App",
+    description: "Task management application with local storage.",
     link: "https://github.com/TheOratorEse/taski-manager-app",
-    tech: ["Flutter", "Supabase", "Sqflite", "Provider"]
+    tech: ["Flutter", "Supabase", "Provider"]
   },
   {
-    title: "Weather Mobile App",
-    description: "Weather forecasting with location services.",
-    link: "https://github.com/TheOratorEse/weather-mobile-app",
+    title: "Weather Forecast App",
+    description: "Weather forecasting app with location-based services.",
+    link: "https://github.com/TheOrator Ese/weather-mobile-app",
     tech: ["Flutter", "Provider", "Weather API"]
+  },
+  {
+    title: "E-commerce Mobile App",
+    description: "Full-featured e-commerce mobile application.",
+    link: "https://github.com",
+    tech: ["Flutter", "Firebase", "Stripe"]
+  },
+  {
+    title: "Fitness Tracking App",
+    description: "Fitness tracking with workout plans and progress monitoring.",
+    link: "https://github.com",
+    tech: ["Flutter", "Riverpod", "Firebase"]
+  },
+  {
+    title: "Crypto Wallet App",
+    description: "Web and Desktop wallet application for cryptocurrency.",
+    link: "https://github.com",
+    tech: ["Flutter", "Dart", "Web3"]
   },
 ];
 
@@ -130,7 +148,6 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold">
                 EO
@@ -138,7 +155,6 @@ function App() {
               <span className="font-bold text-white hidden sm:block">Eseiwi Omorogbe</span>
             </div>
 
-            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
                 <button
@@ -155,7 +171,6 @@ function App() {
               ))}
             </div>
 
-            {/* Social Icons - Desktop */}
             <div className="hidden md:flex items-center gap-2">
               <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white" asChild>
                 <a href="https://github.com/TheOratorEse" target="_blank" rel="noopener noreferrer">
@@ -174,7 +189,6 @@ function App() {
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 text-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -184,7 +198,6 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -271,7 +284,7 @@ function App() {
           >
             <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-blue-500/60 to-transparent" />
             <span className="text-blue-400 tracking-[0.2em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm font-medium">
-              Full Stack Developer
+              Full Stack Developer & DevOps Engineer
             </span>
             <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-blue-500/60 to-transparent" />
           </motion.div>
@@ -280,11 +293,21 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="max-w-2xl text-gray-400 leading-relaxed mb-6 sm:mb-10 text-sm sm:text-lg px-4"
+            className="max-w-2xl text-gray-400 leading-relaxed mb-3 text-sm sm:text-lg px-4"
           >
-            Passionate Full Stack Developer crafting high-performance applications with cutting-edge technologies.
-            Specializing in Flutter, React, Python, and modern backend architectures.
+            Accomplished CTO and Full-Stack Engineer with 5+ years in development and 3+ years in DevOps.
+            Specialized in Node.js, React, Next.js, Flutter, and Laravel.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex items-center justify-center gap-2 text-gray-500 mb-6 text-sm"
+          >
+            <MapPin className="w-4 h-4" />
+            <span>Benin City, Edo State, Nigeria</span>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -344,9 +367,10 @@ function App() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-400 leading-relaxed">
-                    I'm a passionate Full Stack Developer with expertise in building modern, scalable applications. 
-                    I love turning ideas into reality through code and continuously learning new technologies 
-                    to stay at the forefront of web and mobile development.
+                    I'm an accomplished CTO and Full-Stack Developer with over 5 years of experience in software development
+                    and 3+ years in DevOps implementation. I specialize in leading teams and architecting robust solutions
+                    using modern technologies. I've successfully automated deployment processes and ensured application scalability
+                    across diverse software solutions.
                   </p>
                 </CardContent>
               </Card>
@@ -361,19 +385,37 @@ function App() {
               <Card className="glass-effect h-full">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
-                    <Zap className="w-5 h-5 text-blue-400" />
+                    <Briefcase className="w-5 h-5 text-blue-400" />
                     What I Do
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-400 leading-relaxed">
                     I build responsive web applications, cross-platform mobile apps, and robust backend systems.
-                    My focus is on creating performant, user-friendly solutions that solve real-world problems.
+                    My focus is on creating performant, scalable solutions using React, Next.js, Flutter, and Node.js.
+                    I also implement CI/CD pipelines with Docker and Kubernetes for seamless deployments.
                   </p>
                 </CardContent>
               </Card>
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-8 flex flex-wrap justify-center gap-4"
+          >
+            <div className="flex items-center gap-2 text-gray-400 bg-white/5 px-4 py-2 rounded-lg">
+              <Phone className="w-4 h-4 text-blue-400" />
+              <span className="text-sm">09068036444</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400 bg-white/5 px-4 py-2 rounded-lg">
+              <Mail className="w-4 h-4 text-blue-400" />
+              <span className="text-sm">esewi.omorogbe@gmail.com</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -526,7 +568,7 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Experience</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Work Experience</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
           </motion.div>
 

@@ -1,16 +1,27 @@
 # Eseiwi Omorogbe - Portfolio
 
-A professional two-tone portfolio showcasing full-stack development expertise.
+A professional portfolio showcasing Full Stack Developer & DevOps Engineer.
 
-## Features
+## About
 
-- Professional dark theme with blue accents
-- Responsive design for all devices
-- Smooth animations with Framer Motion
-- Interactive navigation with mobile menu
-- Project showcase (Web & Mobile apps)
-- Skills categorized by type
-- Experience timeline
+- **Location**: Benin City, Edo State, Nigeria
+- **Phone**: 09068036444
+- **Email**: esewi.omorogbe@gmail.com
+
+## Experience
+
+- **Joker Hotels** - Full-Stack Developer & DevOps Engineer (Feb-Apr 2025)
+- **YMIT & Andes Tech** - Mobile Development Instructor (2024-2025)
+- **HIIT PLC** - Flutter Instructor (2023-Present)
+- **GreenPoint Technology** - CTO & Software Developer (2019-2023)
+- **INZIDERX** - Web Application Developer (2018-2021)
+
+## Skills
+
+- Frontend: React, Next.js, TypeScript
+- Backend: Node.js, Express.js, Laravel
+- Mobile: Flutter, Dart
+- DevOps: Docker, Kubernetes, AWS, GitLab CI/CD
 
 ## Tech Stack
 
@@ -27,12 +38,6 @@ A professional two-tone portfolio showcasing full-stack development expertise.
 npm install
 npm run dev
 ```
-
-## Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
 
 ## Links
 
