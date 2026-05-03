@@ -98,7 +98,7 @@ The portfolio is optimized for:
 - **GitHub**: https://github.com/TheOratorEse
 - **LinkedIn**: https://linkedin.com/in/eseiwi-omorogbe
 - **Email**: esewi.omorogbe@gmail.com
-- **Resume**: [Google Drive Link](https://drive.google.com/file/d/1trMWEOVZGyMaUGfIVB8bq1s907xdyjA-/view?usp=sharing)
+- **Resume**: [Google Drive Link](https://drive.google.com/file/d/1y9cSc3cnJzD78TK0c8_7cHeProluwS9t/view?usp=sharing)
 
 ## 📄 Projects Featured
 
@@ -140,4 +140,3 @@ This project is open source and available under the MIT License.
 
 ---
 
-Made with ⚡ and passion for clean, futuristic code."

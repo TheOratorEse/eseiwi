@@ -1,340 +1,612 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, FileText, ExternalLink, Code2, Phone, Zap, Star } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Mail, FileText, ExternalLink, Smartphone, ArrowDown, Globe, Menu, X, Code, Server, Database, Smartphone as MobileIcon, Cloud, Lock, Zap, ChevronDown, Briefcase, User, GraduationCap, Award } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 
-// Particle Effect Component
-const ParticleEffect: React.FC = () => {
-  useEffect(() => {
-    const createParticle = () => {
-      const particle = document.createElement('div');
-      particle.className = 'particle particle-cyan';
-      const randomX = Math.random() * window.innerWidth;
-      const randomDuration = 3 + Math.random() * 2;
-      const randomSize = 2 + Math.random() * 4;
-      
-      particle.style.left = randomX + 'px';
-      particle.style.top = window.innerHeight + 'px';
-      particle.style.setProperty('--duration', randomDuration + 's');
-      particle.style.setProperty('--size', randomSize + 'px');
-      particle.style.animation = `floatParticles ${randomDuration}s linear forwards`;
-      
-      document.body.appendChild(particle);
-      
-      setTimeout(() => particle.remove(), randomDuration * 1000);
-    };
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
+];
 
-    const interval = setInterval(createParticle, 300);
-    return () => clearInterval(interval);
-  }, []);
+const skills = [
+  { category: "Frontend", icon: Code, items: ["React", "React Native", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Figma"] },
+  { category: "Backend", icon: Server, items: ["Node.js", "Express.js", "Python", "Flask", "Laravel", "REST API", "GraphQL"] },
+  { category: "Database", icon: Database, items: ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "SQL"] },
+  { category: "Mobile", icon: MobileIcon, items: ["Flutter", "React Native", "Android", "iOS"] },
+  { category: "Cloud", icon: Cloud, items: ["AWS", "Heroku", "Vercel", "Netlify", "Docker"] },
+  { category: "Tools", icon: Zap, items: ["Git", "CI/CD", "Postman", "Jira", "Figma"] },
+];
 
-  return null;
-};
+const experience = [
+  {
+    role: "Full Stack Developer",
+    company: "Tech Solutions Inc.",
+    period: "2023 - Present",
+    description: "Building scalable web and mobile applications using modern technologies.",
+  },
+  {
+    role: "Mobile Developer",
+    company: "AppWorks Studio",
+    period: "2021 - 2023",
+    description: "Developed cross-platform mobile applications for various clients.",
+  },
+  {
+    role: "Junior Developer",
+    company: "StartUp Hub",
+    period: "2019 - 2021",
+    description: "Started career building MVPs and learning modern development practices.",
+  },
+];
+
+const webProjects = [
+  {
+    title: "Csgo-game- Stats Backend",
+    description: "A RESTful API built with Node.js and Express for fetching CS:GO game statistics.",
+    link: "https://github.com/TheOratorEse/csgo-game-stats",
+    tech: ["Python", "Flask", "Backend Api", "JWT"]
+  },
+  {
+    title: "Fit2Feet Backend",
+    description: "A backend service for the Fit2Feet mobile application, handling user data and shoe size recommendations.",
+    link: "https://github.com/TheOratorEse/fit2feetserver",
+    tech: ["Python", "Flask", "Machine Learning", "OpenCv Python"]
+  },
+  {
+    title: "Inventory Management System",
+    description: "A web-based inventory management system with real-time stock tracking.",
+    link: "https://github.com/TheOratorEse/inventory-management-system",
+    tech: ["Vue", "Laravel", "Express", "MongoDB"]
+  },
+  {
+    title: "Real Estate Website",
+    description: "A modern real estate platform featuring property listings.",
+    link: "https://github.com/TheOratorEse/real-estate-website",
+    tech: ["React", "Node.js", "Express", "MongoDB"]
+  }
+];
+
+const mobileProjects = [
+  {
+    title: "Citi Pass App",
+    description: "City Pass App - visitor access in gated communities.",
+    link: "https://github.com/TheOratorEse/city-pass-app",
+    tech: ["Flutter", "Firebase", "Supabase"]
+  },
+  {
+    title: "WebView App",
+    description: "Convert existing webApp to a Mobile app.",
+    link: "https://github.com/TheOratorEse/webview_app",
+    tech: ["Flutter", "Javascript", "WebView", "Firebase"]
+  },
+  {
+    title: "Fit2Feet",
+    description: "Feet measurement and shoe size recommendations.",
+    link: "https://github.com/TheOratorEse/delivery-app",
+    tech: ["Flutter", "Provider", "Python", "Flask"]
+  },
+  {
+    title: "Food Recipe App",
+    description: "Discovering and sharing food recipes.",
+    link: "https://github.com/TheOratorEse/food-recipe-app",
+    tech: ["Flutter", "Firebase", "Node.js"]
+  },
+  {
+    title: "Taski Manager App",
+    description: "Task management application.",
+    link: "https://github.com/TheOratorEse/taski-manager-app",
+    tech: ["Flutter", "Supabase", "Sqflite", "Provider"]
+  },
+  {
+    title: "Weather Mobile App",
+    description: "Weather forecasting with location services.",
+    link: "https://github.com/TheOratorEse/weather-mobile-app",
+    tech: ["Flutter", "Provider", "Weather API"]
+  },
+];
 
 function App() {
-  const [activeTab, setActiveTab] = useState('web');
+  const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const webProjects = [
-    {
-      title: "Csgo-game- Stats Backend",
-      description: "A RESTful API built with Node.js and Express for fetching CS:GO game statistics.",
-      link: "https://github.com/TheOratorEse/csgo-game-stats",
-      tech: ["Python", "Flask", "Backend Api", "JWT"]
-    },
-    {
-      title: "Fit2Feet Backend",
-      description: "A backend service for the Fit2Feet mobile application, handling user data and shoe size recommendations.",
-      link: "https://github.com/TheOratorEse/fit2feetserver",
-      tech: ["Python", "Flask", "Machine Learning", "OpenCv Python"]
-    },
-    {
-      title: "Inventory Management System",
-      description: "A web-based inventory management system with real-time stock tracking and automated reordering capabilities.",
-      link: "https://github.com/TheOratorEse/inventory-management-system",
-      tech: ["Vue", "Laravel", "Express", "MongoDB"]
-    },
-    {
-      title: "Real Estate Website",
-      description: "A modern real estate platform featuring property listings, search functionality, and user authentication.",
-      link: "https://github.com/TheOratorEse/real-estate-website",
-      tech: ["React", "Node.js", "Express", "MongoDB"]
+  const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-  ];
-
-  const mobileProjects = [
-    {
-      title: "Citi Pass App",
-      description: "City Pass App is a comprehensive digital solution designed to streamline the management of visitor access in gated communities and residential estates. The application provides a secure and efficient way to generate, manage, and verify gate passes for visitors, while keeping residents and administrators connected through a robust notification system.",
-      link: "https://github.com/TheOratorEse/city-pass-app",
-      tech: ["Flutter", "Firebase", "Supabase"]
-    },
-    {
-      title: "WebView App",
-      description: "A mobile application that utilizes WebView to convert existing webApp to a Mobile app, display web content, providing a seamless browsing experience.",
-      link: "https://github.com/TheOratorEse/webview_app",
-      tech: ["Flutter", "Javascript", "WebView", "Firebase"]
-    },
-    {
-      title: "Fit2Feet",
-      description: "A mobile application for fitness enthusiasts, feet measurement, and shoe size recommendations.",
-      link: "https://github.com/TheOratorEse/delivery-app",
-      tech: ["Flutter", "Provider", "Python", "Flask", "Machine Learning"]
-    },
-    {
-      title: "Food Recipe App",
-      description: "A cross-platform mobile application for discovering and sharing food recipes with social features.",
-      link: "https://github.com/TheOratorEse/food-recipe-app",
-      tech: ["Flutter", "Firebase", "Node.js"]
-    },
-
-    {
-      title: "Taski Manager App",
-      description: "A task management application that helps users organize and prioritize their tasks efficiently.",
-      link: "https://github.com/TheOratorEse/taski-manager-app",
-      tech: ["Flutter", "Supabase", "Sqflite", "Provider"]
-    },
-    {
-      title: "Weather Mobile App",
-      description: "A weather forecasting application with location-based services and detailed weather information.",
-      link: "https://github.com/TheOratorEse/weather-mobile-app",
-      tech: ["Flutter", "Provider", "Weather API", "Geolocation", "Firebase"]
-    },
-    {
-      title: "NaijaConnect Mobile App",
-      description: "A social networking application for connecting with people in Nigeria, featuring chat and profile functionalities.",
-      link: "https://play.google.com/store/apps/details?id=com.naija.connect",
-      tech: ["React Native", "Laravel", "Redux", "Paystack"]
-
-    },
-    {
-      title: "CycleKit Mobile App",
-      description: "A mobile application for Tracking female cycle, ovulation, fertility and getting sanitary products.",
-      link: "https://github.com/TheOratorEse/cyclekit",
-      tech: ["React Native", "Redux", "Node.js"]
-    }
-  ];
-
-  const techStacks = [
-    "Flutter", "Laravel", "Python", "Flask",
-    "JavaScript", "TypeScript", "React", "React Native",
-    "Node.js", "Express.js", "MongoDB", "PostgreSQL",
-    "Firebase", "Supabase", "Redux", "REST API", "Git", "CI/CD",
-    "HTML5", "CSS3", "Tailwind CSS", "JWT", "Docker", "Kubernetes",
-    "AWS", "Heroku", "Vercel", "Netlify", "Figma", "Postman"
-  ];
+  };
 
   return (
-    <div className="min-h-screen bg-dark-bg text-white font-poppins overflow-hidden">
-      {/* Particle Effect */}
-      <ParticleEffect />
-
-      {/* Animated background grid */}
-      <div className="fixed inset-0 z-0 opacity-10">
-        <div className="absolute inset-0 scan-line" style={{
-          backgroundImage: `linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent)`,
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      {/* Header/Hero Section */}
-      <header className="container mx-auto px-4 py-20 flex flex-col items-center text-center relative z-10">
-        {/* Decorative top accent */}
-        <div className="mb-12 flex items-center gap-3 justify-center animate-slide-in-up">
-          <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-neon-cyan animate-pulse"></div>
-          <Zap size={20} className="text-neon-cyan animate-pulse-ring" />
-          <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-neon-cyan animate-pulse"></div>
-        </div>
-
-        {/* Profile Photo - Squircle */}
-        <div className="mb-12 relative group animate-bounce-in">
-          <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan rounded-squircle blur opacity-60 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan rounded-squircle opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
-          <img 
-            src="https://i.postimg.cc/SRKzBXHr/eseiwi.jpg"
-            alt="Eseiwi Omorogbe"
-            className="relative w-56 h-56 rounded-squircle border-2 border-neon-cyan shadow-2xl animate-float object-cover hover-glow"
-          />
-        </div>
-
-        <h1 className="text-6xl md:text-7xl font-bold mb-4 animate-fade-in tracking-tight">
-          <span className="bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-cyan bg-clip-text text-transparent glow-text">
-            Eseiwi Omorogbe
-          </span>
-        </h1>
-        <div className="flex items-center justify-center gap-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-          <div className="w-8 h-1 bg-gradient-to-r from-neon-cyan to-transparent"></div>
-          <p className="text-xl md:text-2xl text-neon-cyan tracking-widest font-space">FULL STACK DEVELOPER</p>
-          <div className="w-8 h-1 bg-gradient-to-l from-neon-cyan to-transparent"></div>
-        </div>
-        
-        {/* About Section */}
-        <div className="max-w-3xl mx-auto mb-12 glass-effect p-8 rounded-lg border-2 border-neon-cyan border-opacity-30 hover:border-opacity-60 transition-all animate-slide-in-up hover-lift" style={{ animationDelay: '0.3s' }}>
-          <h2 className="text-2xl font-bold mb-4 text-neon-cyan flex items-center justify-center gap-2">
-            <Star size={24} className="animate-pulse" /> ABOUT_ME
-          </h2>
-          <p className="text-gray-300 leading-relaxed text-lg">
-            Passionate Full Stack Developer crafting high-performance applications with cutting-edge technologies. 
-            Specializing in Flutter, React, Python, and modern backend architectures. Transforming ideas into scalable, 
-            robust solutions that push boundaries and deliver excellence.
-          </p>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex gap-8 mb-12 stagger-animation">
-          <a href="https://github.com/TheOratorEse" target="_blank" rel="noopener noreferrer" 
-             className="group relative hover-glow">
-            <div className="absolute -inset-2 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative px-4 py-2 bg-navy-bg border border-neon-cyan rounded-lg hover:bg-navy-light transition-colors hover-lift">
-              <Github size={24} className="text-neon-cyan" />
+    <div className="min-h-screen text-white bg-black">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold">
+                EO
+              </div>
+              <span className="font-bold text-white hidden sm:block">Eseiwi Omorogbe</span>
             </div>
-          </a>
-          <a href="https://linkedin.com/in/eseiwi-omorogbe" target="_blank" rel="noopener noreferrer"
-             className="group relative hover-glow">
-            <div className="absolute -inset-2 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative px-4 py-2 bg-navy-bg border border-neon-blue rounded-lg hover:bg-navy-light transition-colors hover-lift">
-              <Linkedin size={24} className="text-neon-blue" />
-            </div>
-          </a>
-          <a href="mailto:esewi.omorogbe@gmail.com" 
-             className="group relative hover-glow">
-            <div className="absolute -inset-2 bg-gradient-to-r from-neon-blue to-neon-cyan rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative px-4 py-2 bg-navy-bg border border-neon-cyan rounded-lg hover:bg-navy-light transition-colors hover-lift">
-              <Mail size={24} className="text-neon-cyan" />
-            </div>
-          </a>
-        </div>
-      </header>
 
-      {/* Tech Stack Section */}
-      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="glow-text">[ TECH STACKS_ ]</span>
-          </h2>
-          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
-            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-blue"></div>
-            <Zap size={20} className="text-neon-cyan animate-pulse" />
-            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-blue"></div>
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-3 py-2 rounded-lg text-sm transition-all ${
+                    activeSection === item.id
+                      ? 'text-blue-400 bg-blue-500/10'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Social Icons - Desktop */}
+            <div className="hidden md:flex items-center gap-2">
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white" asChild>
+                <a href="https://github.com/TheOratorEse" target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white" asChild>
+                <a href="https://linkedin.com/in/eseiwi-omorogbe" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white" asChild>
+                <a href="mailto:esewi.omorogbe@gmail.com">
+                  <Mail className="w-4 h-4" />
+                </a>
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 text-white"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
-        <div className="glass-effect border-2 border-neon-cyan border-opacity-20 rounded-lg p-8 hover-lift">
-          <div className="flex flex-wrap justify-center gap-4 stagger-animation">
-            {techStacks.map((tech, index) => (
-              <span key={index} 
-                    className="tech-tag px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:text-neon-cyan"
-                    style={{ animationDelay: `${index * 0.05}s` }}>
-                {tech}
-              </span>
+
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-black/95 border-b border-white/10 overflow-hidden"
+            >
+              <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`px-4 py-3 rounded-lg text-left transition-all ${
+                      activeSection === item.id
+                        ? 'text-blue-400 bg-blue-500/10'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <div className="flex gap-2 mt-4 pt-4 border-t border-white/10">
+                  <Button variant="outline" size="icon" className="flex-1" asChild>
+                    <a href="https://github.com/TheOratorEse" target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" className="flex-1" asChild>
+                    <a href="https://linkedin.com/in/eseiwi-omorogbe" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" className="flex-1" asChild>
+                    <a href="mailto:esewi.omorogbe@gmail.com">
+                      <Mail className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      {/* Home Section */}
+      <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-blue-500/20 rounded-full blur-3xl -z-10 scale-110" />
+            <div className="relative p-1 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500">
+              <img
+                src="https://i.postimg.cc/SRKzBXHr/eseiwi.jpg"
+                alt="Eseiwi Omorogbe"
+                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover border-2 border-black"
+              />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 tracking-tight text-white px-4"
+          >
+            Eseiwi Omorogbe
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6 px-4"
+          >
+            <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-blue-500/60 to-transparent" />
+            <span className="text-blue-400 tracking-[0.2em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm font-medium">
+              Full Stack Developer
+            </span>
+            <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-blue-500/60 to-transparent" />
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="max-w-2xl text-gray-400 leading-relaxed mb-6 sm:mb-10 text-sm sm:text-lg px-4"
+          >
+            Passionate Full Stack Developer crafting high-performance applications with cutting-edge technologies.
+            Specializing in Flutter, React, Python, and modern backend architectures.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex gap-4"
+          >
+            <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white" asChild>
+              <a href="https://drive.google.com/file/d/1trMWEOVZGyMaUGfIVB8bq1s907xdyjA-/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                <FileText className="w-4 h-4 mr-2" />
+                View Resume
+              </a>
+            </Button>
+            <Button variant="outline" onClick={() => scrollToSection('contact')} className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400">
+              Contact Me
+            </Button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-blue-500/50 animate-bounce"
+          >
+            <ArrowDown className="w-6 h-6" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">About Me</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="glass-effect h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <User className="w-5 h-5 text-blue-400" />
+                    Who I Am
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-400 leading-relaxed">
+                    I'm a passionate Full Stack Developer with expertise in building modern, scalable applications. 
+                    I love turning ideas into reality through code and continuously learning new technologies 
+                    to stay at the forefront of web and mobile development.
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Card className="glass-effect h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <Zap className="w-5 h-5 text-blue-400" />
+                    What I Do
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-400 leading-relaxed">
+                    I build responsive web applications, cross-platform mobile apps, and robust backend systems.
+                    My focus is on creating performant, user-friendly solutions that solve real-world problems.
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Skills & Expertise</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {skills.map((skill, index) => (
+              <motion.div
+                key={skill.category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="glass-effect h-full group hover:border-blue-500/30 transition-all">
+                  <CardHeader className="flex flex-row items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-all">
+                      <skill.icon className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <CardTitle className="text-white text-lg">{skill.category}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {skill.items.map((item, i) => (
+                        <Badge key={i} variant="outline" className="text-xs border-white/20 text-gray-400">
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="glow-text">[ PROJECTS_DONE ]</span>
-          </h2>
-          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
-            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-purple"></div>
-            <Zap size={20} className="text-neon-cyan animate-pulse" />
-            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-purple"></div>
-          </div>
-        </div>
-        
-        {/* Tabs */}
-        <div className="flex justify-center mb-12 gap-4 animate-slide-in-up">
-          <button 
-            onClick={() => setActiveTab('web')}
-            className={`px-8 py-3 font-medium rounded-lg border-2 transition-all duration-300 hover-lift ${
-              activeTab === 'web' 
-                ? 'bg-gradient-to-r from-neon-cyan to-neon-blue border-neon-cyan text-navy-bg' 
-                : 'border-neon-cyan border-opacity-40 text-neon-cyan hover:border-opacity-100'
-            }`}
+      <section id="projects" className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8 sm:mb-16"
           >
-            <Code2 className="inline mr-2" size={18} />
-            Web Apps
-          </button>
-          <button 
-            onClick={() => setActiveTab('mobile')}
-            className={`px-8 py-3 font-medium rounded-lg border-2 transition-all duration-300 hover-lift ${
-              activeTab === 'mobile' 
-                ? 'bg-gradient-to-r from-neon-cyan to-neon-blue border-neon-cyan text-navy-bg' 
-                : 'border-neon-cyan border-opacity-40 text-neon-cyan hover:border-opacity-100'
-            }`}
-          >
-            <Phone className="inline mr-2" size={18} />
-            Mobile Apps
-          </button>
-        </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Projects</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {(activeTab === 'web' ? webProjects : mobileProjects).map((project, index) => (
-            <div key={index} 
-                 className="group relative glass-effect p-6 rounded-lg border-2 border-neon-cyan border-opacity-20 hover:border-opacity-60 transition-all duration-300 hover:transform hover:scale-105 overflow-hidden hover-lift stagger-animation"
-                 style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan via-transparent to-neon-blue opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
-              <div className="relative z-10">
-                <h3 className="text-xl font-bold mb-3 text-neon-cyan">{project.title}</h3>
-                <p className="text-gray-300 mb-4 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-tag text-xs px-3 py-1 rounded-full">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <a href={project.link} 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   className="inline-flex items-center gap-2 text-neon-cyan hover:text-neon-blue transition-colors font-medium btn-neon">
-                  VIEW_PROJECT <ExternalLink size={16} />
-                </a>
-              </div>
+          <Tabs defaultValue="web" className="w-full">
+            <div className="flex justify-center mb-8 sm:mb-12">
+              <TabsList className="bg-white/5 border border-white/10 p-1 flex gap-2 w-full max-w-md mx-auto">
+                <TabsTrigger value="web" className="flex-1 flex items-center justify-center gap-2 py-2.5 text-xs sm:text-sm data-[state=active]:bg-blue-500/20 data-[state=active]:border-blue-500/30 data-[state=active]:text-white text-gray-400 border border-transparent hover:text-white transition-all">
+                  <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs">Web</span>
+                </TabsTrigger>
+                <TabsTrigger value="mobile" className="flex-1 flex items-center justify-center gap-2 py-2.5 text-xs sm:text-sm data-[state=active]:bg-blue-500/20 data-[state=active]:border-blue-500/30 data-[state=active]:text-white text-gray-400 border border-transparent hover:text-white transition-all">
+                  <Smartphone className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs">Mobile</span>
+                </TabsTrigger>
+              </TabsList>
             </div>
-          ))}
+
+            <TabsContent value="web" className="mt-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                {webProjects.map((project, index) => (
+                  <Card key={index} className="glass-effect h-full group relative overflow-hidden flex flex-col">
+                    <CardHeader className="flex-shrink-0 pb-2">
+                      <CardTitle className="text-base sm:text-lg md:text-xl text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-400 line-clamp-2 text-xs sm:text-sm">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-shrink-0 pt-0 mt-auto">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline" className="text-xs border-white/20 text-gray-400">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button variant="link" className="p-0 h-auto text-blue-400 hover:text-white transition-colors" asChild>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                          View Project <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="mobile" className="mt-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                {mobileProjects.map((project, index) => (
+                  <Card key={index} className="glass-effect h-full group relative overflow-hidden flex flex-col">
+                    <CardHeader className="flex-shrink-0 pb-2">
+                      <CardTitle className="text-base sm:text-lg md:text-xl text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-400 line-clamp-2 text-xs sm:text-sm">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-shrink-0 pt-0 mt-auto">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline" className="text-xs border-white/20 text-gray-400">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button variant="link" className="p-0 h-auto text-blue-400 hover:text-white transition-colors" asChild>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                          View Project <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
-      {/* Resume Section */}
-      <section className="container mx-auto px-4 py-20 relative z-10 section-enter">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="glow-text">[ CREDENTIALS ]</span>
-          </h2>
-          <div className="flex justify-center gap-2 mt-4 animate-slide-in-up">
-            <div className="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-blue"></div>
-            <Zap size={20} className="text-neon-cyan animate-pulse" />
-            <div className="w-16 h-1 bg-gradient-to-l from-neon-cyan to-neon-blue"></div>
+      {/* Experience Section */}
+      <section id="experience" className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Experience</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto space-y-6">
+            {experience.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="glass-effect">
+                  <CardHeader className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                    <div>
+                      <CardTitle className="text-white text-lg">{exp.role}</CardTitle>
+                      <CardDescription className="text-blue-400">{exp.company}</CardDescription>
+                    </div>
+                    <Badge variant="secondary" className="bg-blue-500/10 text-blue-400 border-blue-500/20 whitespace-nowrap">
+                      {exp.period}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-400">{exp.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-center gap-6 stagger-animation">
-          <a href="https://drive.google.com/file/d/1trMWEOVZGyMaUGfIVB8bq1s907xdyjA-/view?usp=sharing" 
-             target="_blank"
-             className="group relative hover-glow">
-            <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
-            <div className="relative inline-flex items-center gap-2 bg-navy-bg px-8 py-4 rounded-lg border-2 border-neon-cyan text-neon-cyan hover:text-white hover:bg-navy-light transition-all btn-neon hover-lift">
-              <FileText size={20} />
-              VIEW_RESUME
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Get In Touch</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-xl mx-auto text-center"
+          >
+            <p className="text-gray-400 mb-8">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+              Feel free to reach out if you'd like to collaborate or just have a chat.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-8 py-6" asChild>
+                <a href="mailto:esewi.omorogbe@gmail.com">
+                  <Mail className="w-5 h-5 mr-2" />
+                  Send Email
+                </a>
+              </Button>
+              <Button variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 px-8 py-6" asChild>
+                <a href="https://linkedin.com/in/eseiwi-omorogbe" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  LinkedIn
+                </a>
+              </Button>
             </div>
-          </a>
-          <a href="https://linkedin.com/in/eseiwi-omorogbe" 
-             target="_blank"
-             rel="noopener noreferrer"
-             className="group relative hover-glow">
-            <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
-            <div className="relative inline-flex items-center gap-2 bg-navy-bg px-8 py-4 rounded-lg border-2 border-neon-cyan text-neon-cyan hover:text-white hover:bg-navy-light transition-all btn-neon hover-lift">
-              <Linkedin size={20} />
-              LINKEDIN_PROFILE
-            </div>
-          </a>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 text-center border-t border-neon-cyan border-opacity-20 relative z-10">
-        <p className="text-gray-400 text-sm">
-          © 2026 Eseiwi Omorogbe| All rights reserved.
+      <footer className="container mx-auto px-4 py-8 text-center border-t border-white/10">
+        <p className="text-sm text-gray-500">
+          © 2026 Eseiwi Omorogbe. All rights reserved.
         </p>
       </footer>
     </div>
