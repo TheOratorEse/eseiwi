@@ -1,6 +1,6 @@
 # Eseiwi Omorogbe - Portfolio
 
-A professional portfolio showcasing Full Stack Developer & DevOps Engineer.
+A professional portfolio showcasing Full Stack Developer & DevOps Engineer with 7+ years experience.
 
 ## About
 
@@ -10,18 +10,21 @@ A professional portfolio showcasing Full Stack Developer & DevOps Engineer.
 
 ## Experience
 
+- **Mindsmith Ltd** - Backend & DevOps Engineer (June 2025 – April 2026)
+- **Zummey Technologies** - Mobile App Developer (June 2025 – Jan 2026)
 - **Joker Hotels** - Full-Stack Developer & DevOps Engineer (Feb-Apr 2025)
 - **YMIT & Andes Tech** - Mobile Development Instructor (2024-2025)
-- **HIIT PLC** - Flutter Instructor (2023-Present)
+- **HIIT PLC** - Mobile App Developer/Instructor (Nov 2023-Present)
+- **ALX Africa** - Software Engineer Intern (2022-2023)
 - **GreenPoint Technology** - CTO & Software Developer (2019-2023)
 - **INZIDERX** - Web Application Developer (2018-2021)
 
 ## Skills
 
 - Frontend: React, Next.js, TypeScript
-- Backend: Node.js, Express.js, Laravel
+- Backend: Node.js, Express.js, Laravel, Python
 - Mobile: Flutter, Dart
-- DevOps: Docker, Kubernetes, AWS, GitLab CI/CD
+- DevOps: Docker, Kubernetes, AWS, GCP, GitLab CI/CD
 
 ## Tech Stack
 

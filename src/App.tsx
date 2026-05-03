@@ -17,19 +17,31 @@ const navItems = [
 
 const skills = [
   { category: "Frontend", icon: Code, items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"] },
-  { category: "Backend", icon: Server, items: ["Node.js", "Express.js", "Laravel", "REST API", "GraphQL"] },
+  { category: "Backend", icon: Server, items: ["Node.js", "Express.js", "Laravel", "Python", "REST API"] },
   { category: "Mobile", icon: Smartphone, items: ["Flutter", "Dart", "Riverpod", "Provider", "Firebase"] },
-  { category: "Database", icon: Database, items: ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "SQLite"] },
+  { category: "Database", icon: Database, items: ["MongoDB", "PostgreSQL", "Firebase", "SQLite", "Hive"] },
   { category: "DevOps", icon: Cloud, items: ["Docker", "Kubernetes", "AWS", "GCP", "GitLab CI/CD", "Jenkins"] },
   { category: "Tools", icon: Zap, items: ["Git", "CI/CD", "Bash", "Python", "Figma", "Postman"] },
 ];
 
 const experience = [
   {
+    role: "Backend & DevOps Engineer",
+    company: "Mindsmith Ltd",
+    period: "June 2025 – April 2026",
+    description: "Developed server-side logic and API integrations for Edcast platform. Designed automated CI/CD pipelines. Managed cloud infrastructure and server configuration. Improved deployment frequency reducing production incidents by 80%. Engineered high-concurrency backend for real-time video conferencing supporting thousands of users.",
+  },
+  {
+    role: "Mobile App Developer",
+    company: "Zummey Technologies",
+    period: "June 2025 – Jan 2026",
+    description: "Engineered cross-platform delivery applications for Users and Riders with pixel-perfect Figma implementation. Architected real-time synchronization with live location tracking and bidirectional communication. Integrated Google Maps API and robust backend services.",
+  },
+  {
     role: "Full-Stack Developer & DevOps Engineer",
     company: "Joker Hotels",
-    period: "Feb 2025 – Apr 2025",
-    description: "Designed hotel booking platform using React/Next.js and Node.js. Established CI/CD pipeline for automated deployment. Managed Docker containerization for high availability.",
+    period: "Feb 2025 – April 2025",
+    description: "Designed hotel booking platform using React/Next.js and Node.js/Express.js. Established complete CI/CD pipeline for automated deployment. Managed Docker containerization for high availability during peak booking periods.",
   },
   {
     role: "Mobile Application Development Instructor",
@@ -38,16 +50,22 @@ const experience = [
     description: "Delivered comprehensive Flutter training sessions. Designed interactive course materials with real-world projects. Mentored future developers in cross-platform mobile development.",
   },
   {
-    role: "Mobile App Development (Flutter) Instructor",
+    role: "Mobile App Developer (Instructor)",
     company: "HIIT PLC",
-    period: "2023 - Present",
+    period: "Nov 2023 - Present",
     description: "Teaching Flutter framework and Dart programming. Guided students in developing cross-platform mobile apps with best practices in UI/UX.",
+  },
+  {
+    role: "Software Engineer Intern",
+    company: "ALX Africa (Mastercard Foundation Scholar)",
+    period: "2022 - 2023",
+    description: "Built robust backend services and APIs using Python and JavaScript. Implemented automated DevOps workflows with Git and CI/CD pipelines. Collaborated in agile environment solving complex algorithmic challenges.",
   },
   {
     role: "CTO & Software Developer",
     company: "GreenPoint Technology",
     period: "2019 - 2023",
-    description: "Led cross-functional development teams. Implemented GitLab CI/CD pipelines reducing release cycle by 40%. Oversaw company and client website development.",
+    description: "Led cross-functional development teams. Implemented GitLab CI/CD pipelines reducing release cycle by 40%. Oversaw company and client website development. Mentored developers and championed code excellence.",
   },
   {
     role: "Web Application Developer",
@@ -65,67 +83,67 @@ const experience = [
 
 const webProjects = [
   {
+    title: "Edcast Platform",
+    description: "Educational platform with real-time video conferencing for thousands of simultaneous users. Built with React/Next.js and Node.js.",
+    link: "https://mindsmith.com",
+    tech: ["React", "Next.js", "Node.js", "WebRTC", "Docker"]
+  },
+  {
     title: "Hotel Booking Platform",
-    description: "Full-stack hotel booking platform with React/Next.js frontend and Node.js backend. Includes CI/CD pipeline and Docker containerization.",
+    description: "Full-stack hotel booking platform with CI/CD pipeline and Docker containerization.",
     link: "https://joker-hotels.com",
     tech: ["React", "Next.js", "Node.js", "Express", "Docker"]
   },
   {
     title: "GreenPoint Website",
-    description: "Company website developed for GreenPoint Technology with modern design and admin dashboard.",
+    description: "Company website with modern design and admin dashboard.",
     link: "https://greenpoint.com",
     tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"]
   },
   {
-    title: "INZIDERX Web Portal",
-    description: "Blockchain-powered decentralized exchange platform with margin trading and on-chain governance.",
+    title: "INZIDERX DEX",
+    description: "Blockchain-powered decentralized exchange with margin trading and wallet apps.",
     link: "https://inziderx.com",
     tech: ["React", "Node.js", "Blockchain", "Web3"]
-  },
-  {
-    title: "Real Estate Platform",
-    description: "Modern real estate platform with property listings and user authentication.",
-    link: "https://github.com/TheOratorEse/real-estate-website",
-    tech: ["React", "Node.js", "Express", "MongoDB"]
   }
 ];
 
 const mobileProjects = [
   {
-    title: "Flutter Food App",
-    description: "Cross-platform food application with real-time ordering features.",
+    title: "Delivery App (Zummey)",
+    description: "Cross-platform delivery application with live tracking and real-time communication.",
+    link: "https://zummey.com",
+    tech: ["Flutter", "Google Maps", "Firebase"]
+  },
+  {
+    title: "Food Recipe App",
+    description: "Cross-platform food application with real-time ordering.",
     link: "https://github.com/TheOratorEse/food-recipe-app",
     tech: ["Flutter", "Firebase", "Node.js"]
   },
   {
     title: "Task Manager App",
-    description: "Task management application with local storage.",
+    description: "Task management with local storage and real-time sync.",
     link: "https://github.com/TheOratorEse/taski-manager-app",
     tech: ["Flutter", "Supabase", "Provider"]
   },
   {
     title: "Weather Forecast App",
-    description: "Weather forecasting app with location-based services.",
-    link: "https://github.com/TheOrator Ese/weather-mobile-app",
+    description: "Weather app with location-based services.",
+    link: "https://github.com/TheOratorEse/weather-mobile-app",
     tech: ["Flutter", "Provider", "Weather API"]
   },
   {
-    title: "E-commerce Mobile App",
-    description: "Full-featured e-commerce mobile application.",
-    link: "https://github.com",
-    tech: ["Flutter", "Firebase", "Stripe"]
-  },
-  {
-    title: "Fitness Tracking App",
-    description: "Fitness tracking with workout plans and progress monitoring.",
-    link: "https://github.com",
-    tech: ["Flutter", "Riverpod", "Firebase"]
-  },
-  {
-    title: "Crypto Wallet App",
-    description: "Web and Desktop wallet application for cryptocurrency.",
+    title: "Crypto Wallet",
+    description: "Web and Desktop wallet for cryptocurrency.",
     link: "https://github.com",
     tech: ["Flutter", "Dart", "Web3"]
+  },
+  {
+    title: "E-commerce Mobile App",
+    description: "Full-featured e-commerce application.",
+    link: "https://github.com",
+    tech: ["Flutter", "Firebase", "Stripe"]
   },
 ];
 
@@ -295,8 +313,8 @@ function App() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="max-w-2xl text-gray-400 leading-relaxed mb-3 text-sm sm:text-lg px-4"
           >
-            Accomplished CTO and Full-Stack Engineer with 5+ years in development and 3+ years in DevOps.
-            Specialized in Node.js, React, Next.js, Flutter, and Laravel.
+            Accomplished CTO and Full-Stack Engineer with 7+ years in software development and 5+ years in DevOps.
+            Skilled in leading teams and architecting robust solutions using Laravel, Node.js, React, Next.js, and Flutter.
           </motion.p>
 
           <motion.div
@@ -316,7 +334,7 @@ function App() {
             className="flex gap-4"
           >
             <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white" asChild>
-              <a href="https://drive.google.com/file/d/1trMWEOVZGyMaUGfIVB8bq1s907xdyjA-/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+              <a href="https://drive.google.com/file/d/1y9cSc3cnJzD78TK0c8_7cHeProluwS9t/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <FileText className="w-4 h-4 mr-2" />
                 View Resume
               </a>
@@ -367,10 +385,10 @@ function App() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-400 leading-relaxed">
-                    I'm an accomplished CTO and Full-Stack Developer with over 5 years of experience in software development
-                    and 3+ years in DevOps implementation. I specialize in leading teams and architecting robust solutions
-                    using modern technologies. I've successfully automated deployment processes and ensured application scalability
-                    across diverse software solutions.
+                    I'm an accomplished Full-Stack Engineer with 7+ years in software development and 5+ years in DevOps.
+                    I specialize in building robust solutions using Laravel, Node.js, Express, React, Next.js, and Flutter.
+                    I've successfully led automated deployment processes and ensured application scalability across diverse software solutions.
+                    Currently focused on building scalable backend architectures and real-time educational platforms.
                   </p>
                 </CardContent>
               </Card>
@@ -392,8 +410,8 @@ function App() {
                 <CardContent>
                   <p className="text-gray-400 leading-relaxed">
                     I build responsive web applications, cross-platform mobile apps, and robust backend systems.
-                    My focus is on creating performant, scalable solutions using React, Next.js, Flutter, and Node.js.
-                    I also implement CI/CD pipelines with Docker and Kubernetes for seamless deployments.
+                    My expertise spans React/Next.js for frontends, Node.js/Laravel for backends, and Flutter for mobile.
+                    I also implement CI/CD pipelines with Docker and Kubernetes for seamless, scalable deployments.
                   </p>
                 </CardContent>
               </Card>
@@ -579,7 +597,7 @@ function App() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
                 <Card className="glass-effect">
                   <CardHeader className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
